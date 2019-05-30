@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Profile;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -29,18 +30,43 @@ class ProfileController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'description' => 'required',
+            'image' => 'required'
+        ]);
+        $image = $request->files->get("image");
+
+        if (isset($image)) {
+            $file_content = file_get_contents($image);
+            $uri = 'uploads/profiles/' . uniqid('', true) . $image->getClientOriginalName();
+            $myfile = fopen($uri, "w") or die("Unable to open file!");
+            fwrite($myfile, $file_content);
+            fclose($myfile);
+        }else{
+            $uri = $request->get('image');
+        }
+        $profile = new Profile([
+            'first_name' => $request->get('first_name'),
+            'last_name' => $request->get('last_name'),
+            'description' => $request->get('description'),
+            'image' => $uri
+        ]);
+
+        $profile->save();
+        return redirect('/profile')->with('success', 'Stock has been added');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -51,7 +77,7 @@ class ProfileController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -62,8 +88,8 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -74,7 +100,7 @@ class ProfileController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

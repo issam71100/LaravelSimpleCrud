@@ -18,7 +18,7 @@ class CreateProfilesTable extends Migration
             $table->string("first_name");
             $table->string("last_name");
             $table->string("image");
-            $table->string("description","60000");
+            $table->longText("description");
         });
     }
 
