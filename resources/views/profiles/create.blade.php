@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="card">
-        <div class="card-header">Create Profile</div>
+        <div class="card-header">Créer un Profile</div>
         <div class="card-body">
             @if ($errors->any())
                 <div class="alert alert-danger">

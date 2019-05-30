@@ -1,99 +1,94 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layout')
 
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
+@section('content')
+    <style>
+        .uper {
+            margin-top: 40px;
+        }
+    </style>
+    <div class="card uper">
+        <div class="card-header">
+            Modifier un profile
         </div>
-    </body>
-</html>
+        <div class="card-body">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div><br/>
+            @endif
+            <form method="post" action="{{ route('profile.update', $profile->id)}}">
+                @method('PATCH')
+                @csrf
+
+                <div class="form-group">
+                    <label for="name">Prénom</label>
+                    <input id="name" type="text" class="form-control"
+                           name="first_name" value="{{$profile->first_name}}" required/>
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Nom</label>
+                    <input id="last_name" type="text" class="form-control"
+                           name="last_name" value="{{$profile->last_name}}" required/>
+                </div>
+
+                <div class="form-group">
+                    <label for="image">Image</label>
+                    <img class="img-fluid" src="{{ $profile->image }}">
+                    <input id="image" class="form-control" type="text" accept="image/*"
+                           value="{{ $profile->image }}" name="image" required/>
+                </div>
+
+                <div class="form-group">
+                    <label>Charger une image depuis :</label>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="fromurl" name="imagesource" value="true"
+                               class="custom-control-input" checked>
+                        <label class="custom-control-label" for="fromurl">Une url</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="fromfolder" name="imagesource" value="false"
+                               class="custom-control-input">
+                        <label class="custom-control-label" for="fromfolder">mes fichiers</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea rows="10" id="description" class="form-control" name="description" required>
+                        {{$profile->description}}
+                    </textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Mettre à jour</button>
+            </form>
+        </div>
+    </div>
+@endsection
+
+<script type="text/javascript">
+    window.onload = function(){
+        let checkboxFolder = document.querySelector('#fromfolder');
+        let checkboxUrl = document.querySelector('#fromurl');
+        let inputImage = document.getElementsByName('image').item(0);
+        console.log(inputImage);
+
+        checkboxFolder.addEventListener('change', function (e) {
+            if (inputImage.classList.contains('form-control'))
+                inputImage.classList.remove('form-control');
+            inputImageValue = inputImage.value;
+            inputImage.type = 'file';
+        });
+
+        checkboxUrl.addEventListener('change', function (e) {
+            inputImage.type = "text";
+            inputImage.value = inputImageValue;
+
+            if (!inputImage.classList.contains('form-control'))
+                inputImage.classList.add('form-control');
+        })
+    }
+
+</script>
