@@ -18,3 +18,7 @@ Route::get('/', function () {
 });
 
 Route::resource('profile','ProfileController');
+
+Route::get('/', [
+    'as' => 'home', 'uses' => 'HomeController@index'
+]);
