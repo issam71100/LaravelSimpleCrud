@@ -16,7 +16,6 @@ class HomeController extends Controller
     public function index()
     {
         $profiles = Profile::all();
-
         return view('home', compact('profiles'));
     }
 }

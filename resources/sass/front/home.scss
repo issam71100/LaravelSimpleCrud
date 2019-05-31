@@ -1,0 +1,24 @@
+#home {
+  .profiles-name {
+    display: flex;
+    flex-direction: column;
+  }
+  .profile{
+    display: none;
+    &.show{
+      display: block;
+    }
+    .profile-img{
+      //width: fit-content;
+      float: left;
+      margin-right: 20px;
+      width: 100px;
+      height: 100px;
+      img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+}

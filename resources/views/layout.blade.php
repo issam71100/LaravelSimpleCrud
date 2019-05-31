@@ -6,8 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Laravel Crud</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" />
+    @yield('stylesheet')
 </head>
-<body>
+<body id="@yield('body_id')">
 <div class="container">
     @yield('content')
 </div>
