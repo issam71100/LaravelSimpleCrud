@@ -1,11 +1,10 @@
 @import "../variables";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins/_breakpoints";
+
+
 #home {
-  .home{
-    position: relative;
-  }
-  .col-md-8{
-    position: unset;
-  }
   .profiles-name {
     display: flex;
     flex-direction: column;
@@ -25,13 +24,16 @@
     @media (max-width: 767px) {
       display: none;
     }
+    @include media-breakpoint-down(sm) {
+      display: none;
+    }
     &.mobile {
       display:none;
       &:nth-child(4n+1){
         background-color: $colorBtn1;
       }
       background-color: $colorBtn2;
-      @media (max-width: 767px) {
+      @include media-breakpoint-down(sm) {
         display: block;
       }
     }
