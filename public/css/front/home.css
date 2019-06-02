@@ -18,12 +18,13 @@
 #home .profile-name {
   border: none;
   border-radius: 0;
-  background-color: deepskyblue;
+  background-color: #343a40;
+  color: white;
   cursor: pointer;
 }
 
 #home .profile-name:nth-child(2n+1) {
-  background-color: deeppink;
+  background-color: darkblue;
 }
 
 @media (max-width: 767px) {
@@ -34,11 +35,11 @@
 
 #home .profile-name.mobile {
   display: none;
-  background-color: deepskyblue;
+  background-color: #343a40;
 }
 
 #home .profile-name.mobile:nth-child(4n+1) {
-  background-color: deeppink;
+  background-color: darkblue;
 }
 
 @media (max-width: 767px) {
@@ -69,7 +70,7 @@
   width: 100px;
   height: 100px;
   padding: 5px;
-  border: 1px solid;
+  box-shadow: 0 0 10px #343a40;
 }
 
 #home .profile .profile-img img {
