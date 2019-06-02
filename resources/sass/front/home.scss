@@ -1,12 +1,49 @@
+@import "../variables";
 #home {
+  .home{
+    position: relative;
+  }
+  .col-md-8{
+    position: unset;
+  }
   .profiles-name {
     display: flex;
     flex-direction: column;
+    .selected{
+      background-color: orangered;
+    }
+  }
+  .profile-name{
+    &:nth-child(2n+1){
+      background-color: $colorBtn1;
+    }
+    border: none;
+    border-radius: 0;
+    background-color: $colorBtn2;
+    cursor: pointer;
+    @media (max-width: 767px) {
+      display: none;
+    }
+    &.mobile {
+      display:none;
+      &:nth-child(4n+1){
+        background-color: $colorBtn1;
+      }
+      background-color: $colorBtn2;
+      @media (max-width: 767px) {
+        display: block;
+      }
+    }
   }
   .profile{
     display: none;
+    padding: 20px;
+    border: 1px solid black;
     &.show{
       display: block;
+      @media (max-width: 768px) {
+        position: relative;
+      }
     }
     .profile-img{
       //width: fit-content;
@@ -14,6 +51,8 @@
       margin-right: 20px;
       width: 100px;
       height: 100px;
+      padding: 5px;
+      border: 1px solid;
       img{
         width: 100%;
         height: 100%;

@@ -26,12 +26,14 @@
                     @endforeach
                 </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-8 col-12">
                 @foreach($profiles as $profile)
                     @php
                         $fullName = $profile->first_name . ' ' . $profile->last_name;
                     @endphp
-
+                    <div class=" profile-name mobile btn btn-light" data-id="{{$profile->id}}">
+                        {{ $fullName }}
+                    </div>
                     <div class="profile" data-id="{{$profile->id}}">
                         <div class="profile-img">
                             <img class="img-fluid" src="{{$profile->image}}">
@@ -54,6 +56,7 @@
         let profiles_name = document.querySelectorAll('.profile-name');
         Array.from(profiles_name).forEach(function (el) {
             el.addEventListener('click',function (e) {
+                console.log(this);
                 let id = this.getAttribute('data-id');
                 let info = document.querySelector('.profile[data-id="'+id+'"]');
 
