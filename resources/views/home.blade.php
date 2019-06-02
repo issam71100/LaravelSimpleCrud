@@ -3,6 +3,7 @@
 @section('stylesheet')
     <link href="{{ asset('css/front/home.css') }}" rel="stylesheet" type="text/css"/>
 @endsection
+
 @section('body_id','home')
 
 @section('content')
@@ -34,9 +35,10 @@
                     <div class=" profile-name mobile btn " data-id="{{$profile->id}}">
                         {{ $fullName }}
                     </div>
+
                     <div class="profile" data-id="{{$profile->id}}">
                         <div class="profile-img">
-                            <img class="img-fluid" src="{{$profile->image}}">
+                            <img class="img-fluid" title="Photo de {{ $fullName }}" alt="Photo de {{ $fullName }}" src="{{$profile->image}}">
                         </div>
 
                         <h2 class="profile-title">{{ $fullName }}</h2>
@@ -53,7 +55,7 @@
 
 @section('script')
     <script type="text/javascript">
-        /*Implementation of Array.from for IE */
+        /*Implementation method Array.from for IE 11*/
         if (!Array.from) {
             Array.from = (function () {
                 var toStr = Object.prototype.toString;
@@ -135,11 +137,13 @@
             }());
         }
     </script>
+
     <script type="text/javascript">
+        /*JS Accordion*/
         let profiles_name = document.querySelectorAll('.profile-name');
+
         Array.from(profiles_name).forEach(function (el) {
             el.addEventListener('click', function (e) {
-                console.log(this);
                 let id = this.getAttribute('data-id');
                 let info = document.querySelector('.profile[data-id="' + id + '"]');
 

@@ -35,11 +35,18 @@
                            name="last_name" value="{{$profile->last_name}}" required/>
                 </div>
 
-                <div class="form-group">
-                    <label for="image">Image</label>
-                    <img class="img-fluid" src="{{ $profile->image }}">
-                    <input id="image" class="form-control" type="text" accept="image/*"
-                           value="{{ $profile->image }}" name="image" required/>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <img class="img-fluid" src="{{ $profile->image }}">
+                    </div>
+                    <div class="col-md-9">
+                        <div class="form-group">
+                            <label for="image">Image</label>
+                            <input id="image" class="form-control" type="text" accept="image/*"
+                                   value="{{ $profile->image }}" name="image" required/>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -58,9 +65,7 @@
 
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea rows="10" id="description" class="form-control" name="description" required>
-                        {{$profile->description}}
-                    </textarea>
+                    <textarea rows="10" id="description" class="form-control" name="description" required>{{$profile->description}}</textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Mettre à jour</button>
             </form>

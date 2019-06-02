@@ -93,9 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-console.log('bonjour');
-
-xczsdc: ;
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open 'C:\\Users\\issam\\Documents\\Candidature\\blog\\resources\\js\\create_profile.js'");
 
 /***/ }),
 

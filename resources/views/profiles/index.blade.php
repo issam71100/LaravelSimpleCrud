@@ -6,7 +6,7 @@
             {{ session()->get('success') }}
         </div><br/>
     @endif
-    <table class="table table-striped">
+    <table class="table table-striped table-dark">
         <thead>
         <tr>
             <td>ID</td>
