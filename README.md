@@ -1,5 +1,3 @@
-# LaravelSimpleCrud
-
 # Getting started
 
 ## Installation
